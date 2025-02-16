@@ -1,7 +1,7 @@
 import { useRef, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import Trash from "../icons/Trash";
-import { setNewOffset, autoGrow } from "../utils";
+import { setNewOffset, autoGrow, setZIndex } from "../utils";
 
 const NoteCard = ({ note }) => {
   const body = JSON.parse(note.body);
@@ -18,6 +18,7 @@ const NoteCard = ({ note }) => {
   }, []);
 
   const mouseDown = (e) => {
+    setZIndex(cardRef.current);
     mouseStartPos = { x: e.clientX, y: e.clientY };
     document.addEventListener("mousemove", mouseMove);
     document.addEventListener("mouseup", mouseUp);
@@ -67,6 +68,7 @@ const NoteCard = ({ note }) => {
           style={{ color: colors.colorText }}
           defaultValue={body}
           onInput={() => autoGrow(textAreaRef)}
+          onFocus={() => setZIndex(cardRef.current)}
           name=""
           id=""
         ></textarea>
