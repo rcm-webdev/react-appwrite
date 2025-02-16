@@ -1,6 +1,7 @@
 import { useRef, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import Trash from "../icons/Trash";
+import { setNewOffset, autoGrow } from "../utils";
 
 const NoteCard = ({ note }) => {
   const body = JSON.parse(note.body);
@@ -15,12 +16,6 @@ const NoteCard = ({ note }) => {
   useEffect(() => {
     autoGrow(textAreaRef);
   }, []);
-
-  const autoGrow = (textAreaRef) => {
-    const { current } = textAreaRef;
-    current.style.height = "auto"; // Reset the height
-    current.style.height = current.scrollHeight + "px"; // Set the new height
-  };
 
   const mouseDown = (e) => {
     mouseStartPos = { x: e.clientX, y: e.clientY };
@@ -43,6 +38,9 @@ const NoteCard = ({ note }) => {
       x: cardRef.current.offsetLeft - mouseMoveDir.x,
       y: cardRef.current.offsetTop - mouseMoveDir.y,
     });
+
+    const newPosition = setNewOffset(cardRef.current, mouseMoveDir);
+    setPosition(newPosition);
   };
 
   return (
