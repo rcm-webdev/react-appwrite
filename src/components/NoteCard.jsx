@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import Trash from "../icons/Trash";
 
 const NoteCard = ({ note }) => {
   const body = JSON.parse(note.body);
@@ -15,7 +16,9 @@ const NoteCard = ({ note }) => {
       <div
         className="card-header"
         style={{ backgroundColor: colors.colorHeader }}
-      ></div>
+      >
+        <Trash />
+      </div>
 
       <div className="card-body">
         <textarea
