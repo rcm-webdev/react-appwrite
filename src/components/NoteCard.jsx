@@ -12,7 +12,19 @@ const NoteCard = ({ note }) => {
         backgroundColor: colors.colorBody,
       }}
     >
-      {body}
+      <div
+        className="card-header"
+        style={{ backgroundColor: colors.colorHeader }}
+      ></div>
+
+      <div className="card-body">
+        <textarea
+          style={{ color: colors.colorText }}
+          defaultValue={body}
+          name=""
+          id=""
+        ></textarea>
+      </div>
     </div>
   );
 };
